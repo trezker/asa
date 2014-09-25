@@ -15,7 +15,6 @@ class user_tests extends UnitTestCase {
 	}
 
 	function test_create_user() {
-
 		$sid = null;
 		$input = array(
 			"username" => "a",
@@ -24,10 +23,29 @@ class user_tests extends UnitTestCase {
 		$user_api = new user_api($sid, $input, $this->store_core);
 		$result = $user_api->create_user();
 		$this->assertTrue($result['success']);
+	}
 
+	function test_create_user_unique_name() {
+		$sid = null;
+		$input = array(
+			"username" => "a",
+			"password" => "b",
+		);
+		$user_api = new user_api($sid, $input, $this->store_core);
+		$user_api->create_user();
+		$result = $user_api->create_user();
+		$this->assertFalse($result['success']);
 	}
 
 	function test_get_user() {
-		//Succeeds, no output or throws
+		$this->test_create_user();
+		$sid = null;
+		$input = array(
+			"username" => "a",
+			"password" => "b",
+		);
+		$user_api = new user_api($sid, $input, $this->store_core);
+		$result = $user_api->get_user();
+		$this->assertTrue($result['name'] === "a");
 	}
 }
