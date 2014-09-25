@@ -3,6 +3,6 @@
 BEGIN;
 
 -- XXX Add DDLs here.
-DROP USER asa;
+DROP USER 'asa'@'localhost';
 
 COMMIT;
