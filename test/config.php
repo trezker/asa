@@ -3,8 +3,8 @@
 $config = array(
 	'database' => array(
 		'host' => 'localhost',
-		'user' => 'test',
-		'password' => 'test',
-		'database' => 'test'
+		'user' => 'asa',
+		'password' => '23i5vb23il',
+		'database' => 'asa'
 	)
 ); 

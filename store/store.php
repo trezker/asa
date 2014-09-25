@@ -1,9 +1,8 @@
 <?php
 class store {
-	private $db = null;
-	private $cache = null;
+	protected $store_core = null;
 	
-	function __construct($conf) {
-		
+	function __construct($store_core) {
+		$this->store_core = $store_core;
 	}
 }
