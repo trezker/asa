@@ -5,3 +5,6 @@ asauser 2014-09-23T18:35:59Z Anders Andersson <anders@tahr> # Creates schema use
 user 2014-09-25T07:59:47Z Anders Andersson <anders@tahr> # Create user table
 user_agent 2014-09-27T06:55:56Z Anders Andersson <anders@tahr> # Create user_agent table
 session [user user_agent] 2014-09-27T06:40:46Z Anders Andersson <anders@tahr> # Create session table
+access 2014-10-01T20:00:36Z Anders Andersson <anders@tahr> # Create access table
+user_access [user access] 2014-10-01T20:09:47Z Anders Andersson <anders@tahr> # Create user_access table
+default_admin [user_access] 2014-10-01T20:19:35Z Anders Andersson <anders@tahr> # Create a default admin user

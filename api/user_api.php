@@ -9,18 +9,12 @@ class user_api extends api {
 		return $result;
 	}
 	
-	public function get_user() {
-		$user_store = new user_store($this->store_core);
-		$result = $user_store->get_user($this->input);
-		return $result;
-	}
-	
 	public function login() {
-		$success = false;
-		$message = "";
-		if($this->input["username"] === "a") {
-			$success = true;
+		$user_store = new user_store($this->store_core);
+		$result = $user_store->login($this->input);
+		if($result === false) {
+			return array("success" => false);
 		}
-		return array("success" => $success, "message" => $message);
+		return array("success" => true);
 	}
 }

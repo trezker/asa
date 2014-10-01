@@ -6,7 +6,13 @@ class user_tests extends UnitTestCase {
 	private $store_core = null;
 	function setUp() {
 		include('config.php');
-		$this->store_core = new store_core($config);
+		$sid = array(
+			"sessionid" => "a",
+			"ip_address" => "b",
+			"user_agent" => "c"
+		);
+		$this->store_core = new store_core();
+		$this->store_core->initialize($config, $sid);
 		$this->store_core->begin_transaction();
 	}
 
@@ -15,37 +21,34 @@ class user_tests extends UnitTestCase {
 	}
 
 	function test_create_user() {
-		$sid = null;
 		$input = array(
 			"username" => "a",
 			"password" => "b",
 		);
-		$user_api = new user_api($sid, $input, $this->store_core);
+		$user_api = new user_api($input, $this->store_core);
 		$result = $user_api->create_user();
 		$this->assertTrue($result['success']);
 	}
 
 	function test_create_user_unique_name() {
-		$sid = null;
 		$input = array(
 			"username" => "a",
 			"password" => "b",
 		);
-		$user_api = new user_api($sid, $input, $this->store_core);
+		$user_api = new user_api($input, $this->store_core);
 		$user_api->create_user();
 		$result = $user_api->create_user();
 		$this->assertFalse($result['success']);
 	}
 
-	function test_get_user() {
+	function test_login() {
 		$this->test_create_user();
-		$sid = null;
 		$input = array(
 			"username" => "a",
 			"password" => "b",
 		);
-		$user_api = new user_api($sid, $input, $this->store_core);
-		$result = $user_api->get_user();
-		$this->assertTrue($result['name'] === "a");
+		$user_api = new user_api($input, $this->store_core);
+		$result = $user_api->login();
+		$this->assertTrue($result['success'] === true);
 	}
 }
